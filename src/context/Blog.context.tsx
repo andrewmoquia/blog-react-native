@@ -1,9 +1,6 @@
 import { createContext } from 'react';
-import { IBlogContext } from '../interface/Blog.interface';
-const BlogContext = createContext([]);
+import { IBlogData } from '../interface/Blog.interface';
 
-const BlogProvider = ({ children }: IBlogContext) => {
-    return <BlogContext.Provider value={[]}>{children}</BlogContext.Provider>;
-};
+const BlogContext = createContext<IBlogData[]>([]);
 
-export default BlogProvider;
+export default BlogContext;

@@ -1,3 +1,5 @@
-export interface IBlogContext {
-    children: any;
+export interface IBlogData {
+    id: string;
+    title: string;
+    content: string;
 }
