@@ -4,7 +4,6 @@ const HomeScreen = () => {
     return (
         <View>
             <Text style={styles.textStyle}>Home</Text>
-            <Text>Home with no Style</Text>
         </View>
     );
 };
