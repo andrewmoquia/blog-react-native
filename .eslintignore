@@ -3,3 +3,4 @@ dist
 coverage
 src/types/env.d.tsx
 babel.config.js
+react-native.config.js
