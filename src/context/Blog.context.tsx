@@ -1,22 +1,35 @@
-import { createContext, useState } from 'react';
-import { IBlogContextProps, IBlogData } from 'src/interface/Blog.interface';
+import { createContext, useReducer } from 'react';
+import { IBlogContextProps, IBlogData, IBlogReducerType } from 'src/interface/Blog.interface';
 
 export const BlogContext = createContext<IBlogContextProps>({
     data: [],
-    addBlogPosts: () => {},
+    addBlogPost: () => {},
+    deleteBlogPost: () => {},
 });
+
+const reducer = (state: IBlogData[], action: IBlogReducerType) => {
+    const { type, payload } = action;
+    switch (type) {
+        case 'ADD_BLOG':
+            return [...state, payload];
+        case 'DELETE_BLOG':
+            return state.filter((blog) => blog.id !== payload.id);
+        default:
+            return state;
+    }
+};
 
 const BlogProvider = ({ children }: any) => {
     const defBlogPostsVal: IBlogData[] = [];
 
-    const [blogPosts, setBlogPosts] = useState(defBlogPostsVal);
+    const [state, dispatch] = useReducer(reducer, defBlogPostsVal);
 
-    const addBlogPosts = ({ id, title, content }: IBlogData) => {
-        setBlogPosts([...blogPosts, { id, title, content }]);
-    };
+    const addBlogPost = (payload: IBlogData) => dispatch({ type: 'ADD_BLOG', payload });
+
+    const deleteBlogPost = (payload: IBlogData) => dispatch({ type: 'DELETE_BLOG', payload });
 
     return (
-        <BlogContext.Provider value={{ data: blogPosts, addBlogPosts }}>
+        <BlogContext.Provider value={{ data: state, addBlogPost, deleteBlogPost }}>
             {children}
         </BlogContext.Provider>
     );

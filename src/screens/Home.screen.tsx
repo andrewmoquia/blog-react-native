@@ -4,12 +4,12 @@ import { BlogContext } from '../context/Blog.context';
 import uuid from 'react-native-uuid';
 
 const HomeScreen = () => {
-    const { data, addBlogPosts } = useContext(BlogContext);
+    const { data, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
-    console.log(data, addBlogPosts);
+    console.log(data, addBlogPost);
 
     const handleAddBlogPostsAction = () => {
-        addBlogPosts({ id: String(uuid.v4()), title: 'Bloggerist', content: 'Lah' });
+        addBlogPost({ id: String(uuid.v4()), title: 'Bloggerist', content: 'Lah' });
     };
 
     return (
@@ -22,7 +22,14 @@ const HomeScreen = () => {
                 keyExtractor={(item) => item.id}
                 data={data}
                 renderItem={({ item }) => {
-                    return <Text>{item.id}</Text>;
+                    return (
+                        <View>
+                            <Text>{item.id}</Text>
+                            <TouchableOpacity onPress={() => deleteBlogPost(item)}>
+                                <Text>Delete Blog</Text>
+                            </TouchableOpacity>
+                        </View>
+                    );
                 }}
             />
 

@@ -6,5 +6,11 @@ export interface IBlogData {
 
 export interface IBlogContextProps {
     data: IBlogData[];
-    addBlogPosts: ({ id, title, content }: IBlogData) => void;
+    addBlogPost: (payload: IBlogData) => void;
+    deleteBlogPost: (payload: IBlogData) => void;
+}
+
+export interface IBlogReducerType {
+    type: string;
+    payload: IBlogData;
 }
