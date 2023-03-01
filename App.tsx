@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/Home.screen';
 import { useFonts } from 'expo-font';
-import BlogContext from './src/context/Blog.context';
+import BlogProvider from './src/context/Blog.context';
 
 const App = () => {
     const [fontsLoaded] = useFonts({
@@ -11,7 +11,7 @@ const App = () => {
     if (!fontsLoaded) return null;
 
     return (
-        <BlogContext.Provider value={[]}>
+        <BlogProvider>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName='Search'>
                     <Stack.Screen
@@ -21,7 +21,7 @@ const App = () => {
                     />
                 </Stack.Navigator>
             </NavigationContainer>
-        </BlogContext.Provider>
+        </BlogProvider>
     );
 };
 
