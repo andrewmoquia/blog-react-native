@@ -2,7 +2,7 @@
   "expo": {
     "name": "blog-react-native",
     "slug": "blog-react-native",
-    "version": "1.0.0",
+    "version": "1.0.02",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -36,6 +36,17 @@
       "eas": {
         "projectId": "70f5bd68-e1eb-4ef6-8ba8-91c3d166e4e1"
       }
-    }
+    },
+    "jsEngine": "hermes",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "flipper": true
+          }
+        }
+      ]
+    ]
   }
 }

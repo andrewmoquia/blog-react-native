@@ -25,15 +25,7 @@ module.exports = function (api) {
           allowUndefined: true,
           verbose: false,
         },
-      ],
-      [
-        'expo-build-properties',
-        {
-          android: {
-            flipper: true,
-          },
-        },
-      ],
+      ]
     ],
   };
 };

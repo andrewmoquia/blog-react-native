@@ -1,18 +1,26 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/Home.screen';
-import { useFonts } from 'expo-font';
+// import { useFonts } from 'expo-font';
 import BlogProvider from './src/context/Blog.context';
+// import { useEffect } from 'react';
+import { useFlipper } from '@react-navigation/devtools';
 
 const App = () => {
-    const [fontsLoaded] = useFonts({
-        'Poppins-Thin': require('./assets/fonts/Poppins-Thin.ttf'),
-    });
-    if (!fontsLoaded) return null;
+    const navigationRef = useNavigationContainerRef();
+    // const [fontsLoaded] = useFonts({
+    //     'Poppins-Thin': require('./assets/fonts/Poppins-Thin.ttf'),
+    // });
+
+    // if (!fontsLoaded) return null;
+
+    // useEffect(() => {}, []);
+
+    useFlipper(navigationRef);
 
     return (
         <BlogProvider>
-            <NavigationContainer>
+            <NavigationContainer ref={navigationRef}>
                 <Stack.Navigator initialRouteName='Search'>
                     <Stack.Screen
                         name='Home'
