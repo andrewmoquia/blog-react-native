@@ -1,15 +1,20 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { BlogContext } from '../context/Blog.context';
+// import { BlogContext } from '../context/Blog.context';
 import uuid from 'react-native-uuid';
+import { useSelector, useDispatch } from 'react-redux';
+import { addBlog, deleteBlog } from '../redux/blog/blog.redux';
+import type { RootState } from '../redux/store';
 
 const HomeScreen = () => {
-    const { data, addBlogPost, deleteBlogPost } = useContext(BlogContext);
+    // const { data, addBlogPost, deleteBlogPost } = useContext(BlogContext);
+    // console.log(data, addBlogPost);
 
-    console.log(data, addBlogPost);
+    const data = useSelector((state: RootState) => state.blog.data);
+    const dispatch = useDispatch();
 
     const handleAddBlogPostsAction = () => {
-        addBlogPost({ id: String(uuid.v4()), title: 'Bloggerist', content: 'Lah' });
+        dispatch(addBlog({ id: String(uuid.v4()), title: 'Bloggerist', content: 'Lah' }));
     };
 
     return (
@@ -25,7 +30,7 @@ const HomeScreen = () => {
                     return (
                         <View>
                             <Text>{item.id}</Text>
-                            <TouchableOpacity onPress={() => deleteBlogPost(item)}>
+                            <TouchableOpacity onPress={() => dispatch(deleteBlog(item))}>
                                 <Text>Delete Blog</Text>
                             </TouchableOpacity>
                         </View>

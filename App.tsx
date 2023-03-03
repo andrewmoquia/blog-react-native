@@ -2,9 +2,11 @@ import { NavigationContainer, useNavigationContainerRef } from '@react-navigatio
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/screens/Home.screen';
 // import { useFonts } from 'expo-font';
-import BlogProvider from './src/context/Blog.context';
+// import BlogProvider from './src/context/Blog.context';
 // import { useEffect } from 'react';
 import { useFlipper } from '@react-navigation/devtools';
+import { store } from './src/redux/store';
+import { Provider } from 'react-redux';
 
 const App = () => {
     const navigationRef = useNavigationContainerRef();
@@ -19,7 +21,7 @@ const App = () => {
     useFlipper(navigationRef);
 
     return (
-        <BlogProvider>
+        <Provider store={store}>
             <NavigationContainer ref={navigationRef}>
                 <Stack.Navigator initialRouteName='Search'>
                     <Stack.Screen
@@ -29,7 +31,7 @@ const App = () => {
                     />
                 </Stack.Navigator>
             </NavigationContainer>
-        </BlogProvider>
+        </Provider>
     );
 };
 
